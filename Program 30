@@ -1,0 +1,27 @@
+# Program-30
+Program 30
+class Solution:
+    def findTwoElement(self, arr):
+        n = len(arr)
+        repeating = -1
+        missing = -1
+        
+        # 1. Find the repeating number by marking indices
+        for i in range(n):
+            val = abs(arr[i])
+            # If the value at this index is already negative, 
+            # we've encountered this number before.
+            if arr[val - 1] < 0:
+                repeating = val
+            else:
+                arr[val - 1] = -arr[val - 1]
+        
+        # 2. Find the missing number
+        # The only index that remains positive corresponds to the missing number
+        for i in range(n):
+            if arr[i] > 0:
+                missing = i + 1
+                break
+                
+        return [repeating, missing]
+
